@@ -1,24 +1,26 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import SideNav from './components/sidenav';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
+import Home from "./pages/Home";
+import Salespersons from './pages/Salespersons';
+import Sales from './pages/Sales';
+import Customers from './pages/Customers';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Router>
+        <SideNav />
+        <Routes>
+          <Route path="/" element={<Home />}/>
+          <Route path="/salespersons" element={<Salespersons/>}/>
+          <Route path="/customers" element={<Customers/>}/>
+          <Route path="/sales" element={<Sales/>}/>
+        </Routes>
+      </Router>
     </div>
   );
 }
