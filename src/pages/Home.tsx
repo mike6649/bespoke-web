@@ -5,7 +5,7 @@ export default function Home() {
   return (
     <div className="home">
       <h1>BeSpoked Bikes</h1>
-      <img src={logo}/>
+      <img src={logo} alt="BespokedBikes Logo"/>
     </div>
   );
 }

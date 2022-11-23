@@ -3,25 +3,26 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "./form.css";
-import { Sale, Salesperson } from '../models';
-import { SalespersonApiFp } from '../apis/salesperson-api';
+import { Product } from '../models';
+import { ProductApiFp } from '../apis/product-api';
 
 type Props = {
     show: boolean,
     onChangeShow: (show: boolean) => void
 }
 
-export default class CreateSalesperson extends React.Component<Props> {
+export default class CreateProduct extends React.Component<Props> {
 
     state = {
-        firstname: "",
-        lastname: "",
-        address: "",
-        phone: "",
-        begin_date: "",
-        end_date: "",
-        manager: ""
+        name: "",
+        manufacturer: "",
+        style: "",
+        purchase_price: "",
+        sale_price: "",
+        quantity: "",
+        commission_pct: ""
     }
+
 
     handleClose = () => this.props.onChangeShow(false);
     handleShow = () => this.props.onChangeShow(true);
@@ -38,13 +39,17 @@ export default class CreateSalesperson extends React.Component<Props> {
         for (f in this.state) {
             submission[f] = this.state[f];
         }
-        console.log(submission);
-        SalespersonApiFp().updateSalesPerson(submission as Salesperson).then(
+        (submission as Product).quantity = parseInt(submission.quantity ?? "0");
+
+        ProductApiFp().updateProduct(submission as Product).then(
             req => {
                 req().then(
                     res => {
-                        console.log(res.data);
-                        this.handleClose();
+                        if (res.status >= 200 && res.status < 300) {
+                            this.handleClose();
+                        } else {
+                            alert(res.data);
+                        }
                     }
                 )
             }
@@ -56,45 +61,45 @@ export default class CreateSalesperson extends React.Component<Props> {
             <>
                 <Modal show={this.props.show} onHide={this.handleClose}>
                     <Modal.Header closeButton>
-                        <Modal.Title>Create Salesperson</Modal.Title>
+                        <Modal.Title>Create Product</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                         <form>
                             <div>
-                                First Name <input
-                                    name='firstname'
-                                    placeholder='First Name'
-                                    value={this.state.firstname}
+                                Name <input
+                                    name='name'
+                                    placeholder='Name'
                                     onChange={this.handleChange}
                                 />
-                                Last Name <input
-                                    name='lastname'
-                                    placeholder='Last Name'
+                                Manufacturer <input
+                                    name='manufacturer'
+                                    placeholder='Manufacturer'
                                     onChange={this.handleChange}
                                 />
-                                Address <input
-                                    name='address'
-                                    placeholder='Address'
+                                Style <input
+                                    name='style'
+                                    placeholder='Style'
                                     onChange={this.handleChange}
                                 />
-                                Phone <input
-                                    name='phone'
-                                    placeholder='Phone'
+                                Purchase Price <input
+                                    name='purchase_price'
+                                    type="number"
                                     onChange={this.handleChange}
                                 />
-                                Begin Date <input
-                                    name='begin_date'
-                                    placeholder='1970-01-01'
+                                Sale Price <input
+                                    name='sale_price'
+                                    placeholder='234.56'
                                     onChange={this.handleChange}
                                 />
-                                End Date <input
-                                    name='end_date'
-                                    placeholder='1970-01-01'
+                                Quantity <input
+                                    name='quantity'
+                                    type="number"
+                                    placeholder='100'
                                     onChange={this.handleChange}
                                 />
-                                Manager <input
-                                    name='manager'
-                                    placeholder='Manager'
+                                Commission % <input
+                                    name='commission_pct'
+                                    placeholder='12.34'
                                     onChange={this.handleChange}
                                 />
                             </div>

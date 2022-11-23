@@ -38,7 +38,7 @@ export default class Customers extends React.Component {
     this.setState({ showModal: true, activePerson: person });
   }
 
-  createSalesperson = () => {
+  createCustomer = () => {
     this.setState({showCreateModal: true});
   }
 
@@ -89,7 +89,7 @@ export default class Customers extends React.Component {
             }
           </tbody>
         </table>
-        Add Customer <GrIcons.GrAddCircle  onClick= {() => {this.createSalesperson();}}/>
+        Add Customer <GrIcons.GrAddCircle  onClick= {() => {this.createCustomer();}}/>
         <UpdateCustomer
           person={this.state.activePerson}
           show={this.state.showModal}

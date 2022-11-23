@@ -62,7 +62,6 @@ export default class CreateCustomer extends React.Component<Props> {
                                 First Name <input
                                     name='firstname'
                                     placeholder='First Name'
-                                    value={this.state.firstname}
                                     onChange={this.handleChange}
                                 />
                                 Last Name <input

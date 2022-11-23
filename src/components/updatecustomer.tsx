@@ -65,7 +65,6 @@ export default class UpdateCustomer extends React.Component<Props> {
                                     name='firstname'
                                     placeholder='First Name'
                                     defaultValue={this.props.person?.firstname}
-                                    value={this.state.firstname}
                                     onChange={this.handleChange}
                                 />
                                 Last Name <input
