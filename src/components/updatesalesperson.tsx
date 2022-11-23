@@ -5,6 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import "./form.css";
 import { Sale, Salesperson } from '../models';
 import { SalespersonApiFp } from '../apis/salesperson-api';
+import errorhandler from '../errorhandler';
 
 type Props = {
     person?: Salesperson | null,
@@ -48,7 +49,7 @@ export default class UpdateSalesperson extends React.Component<Props> {
                         console.log(res.data);
                         this.handleClose();
                     }
-                )
+                ).catch(errorhandler);
             }
         )
     }

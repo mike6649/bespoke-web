@@ -5,6 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import "./form.css";
 import { Sale, Salesperson } from '../models';
 import { SalespersonApiFp } from '../apis/salesperson-api';
+import errorhandler from '../errorhandler';
 
 type Props = {
     show: boolean,
@@ -46,7 +47,7 @@ export default class CreateSalesperson extends React.Component<Props> {
                         console.log(res.data);
                         this.handleClose();
                     }
-                )
+                ).catch(errorhandler);
             }
         )
     }

@@ -4,9 +4,9 @@ import Modal from 'react-bootstrap/Modal';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "./form.css";
 import { Sale } from '../models';
-import { SaleApiFp } from '../apis/sale-api';
-import { CustomerApiFp } from '../apis/customer-api';
 import Autocomplete from './autocomplete';
+import errorhandler from '../errorhandler';
+import { ProductApiFp, SaleApiFp, CustomerApiFp, SalespersonApiFp } from '../api';
 
 type Props = {
     show: boolean,
@@ -15,15 +15,16 @@ type Props = {
 
 export default class CreateSale extends React.Component<Props> {
 
+
     state = {
-        product_id: 0,
-        customer_id: 0,
-        salesperson_id: 0,
         sale_date: "",
-        quantity: 0,
-        products: [],
-        customers: [],
-        salespersons: []
+        quantity: "1",
+        products: new Map(),
+        customers: new Map(),
+        salespersons: new Map(),
+        productInput: "",
+        customerInput: "",
+        salespersonInput: ""
     }
 
     handleClose = () => this.props.onChangeShow(false);
@@ -37,10 +38,10 @@ export default class CreateSale extends React.Component<Props> {
     handleSubmit = () => {
 
         let submission: { [k: string]: any } = {};
-        submission.product_id = this.state.product_id;
-        submission.customer_id = this.state.customer_id;
-        submission.salesperson_id = this.state.salesperson_id;
-        submission.quantity = this.state.quantity;
+        submission.product_id = this.state.products.get(this.state.productInput);
+        submission.customer_id = this.state.customers.get(this.state.customerInput);
+        submission.salesperson_id = this.state.salespersons.get(this.state.salespersonInput);
+        submission.quantity = parseInt(this.state.quantity);
         submission.sale_date = this.state.sale_date;
 
         console.log(submission);
@@ -51,24 +52,70 @@ export default class CreateSale extends React.Component<Props> {
                         console.log(res.data);
                         this.handleClose();
                     }
-                )
+                ).catch(errorhandler);
             }
         )
     }
 
     onEnter = () => {
-        console.log("Hello");
         CustomerApiFp().getCustomers().then(
             req => {
-              req().then(
-                res => {
-                  const persons = res.data;
-                  persons.sort((a, b) => ((a?.id ?? 0) - (b?.id ?? 0)));
-                  this.setState({ customers: persons });
-                }
-              )
+                req().then(
+                    res => {
+                        const persons = res.data;
+                        // build a mapping from Firstname lastname to ID
+                        const map = new Map(
+                            persons.map(o => {
+                                return [`${o.firstname} ${o.lastname}`, o.id]
+                            })
+                        );
+                        this.setState({ customers: map });
+                    }
+                )
             }
-          );
+        );
+
+        ProductApiFp().getProducts().then(
+            req => {
+                req().then(
+                    res => {
+                        const map = new Map(
+                            res.data.map(o => {
+                                return [`${o.manufacturer?.toUpperCase()} ${o.name}`, o.id]
+                            })
+                        );
+                        this.setState({ products: map });
+                    }
+                )
+            }
+        );
+
+        SalespersonApiFp().getSalespersons().then(
+            req => {
+                req().then(
+                    res => {
+                        const map = new Map(
+                            res.data.map(o => {
+                                return [`${o.firstname} ${o.lastname}`, o.id]
+                            })
+                        );
+                        this.setState({ salespersons: map });
+                    }
+                )
+            }
+        );
+    }
+
+    handleProductInputChange = (s: string) => {
+        this.setState({ productInput: s });
+    }
+
+    handleCustomerInputChange = (s: string) => {
+        this.setState({ customerInput: s });
+    }
+
+    handleSalespersonInputChange = (s: string) => {
+        this.setState({ salespersonInput: s });
     }
 
     render() {
@@ -76,39 +123,41 @@ export default class CreateSale extends React.Component<Props> {
             <>
                 <Modal show={this.props.show} onHide={this.handleClose} onEntered={this.onEnter}>
                     <Modal.Header closeButton>
-                        <Modal.Title>Create Salesperson</Modal.Title>
+                        <Modal.Title>Create Sale</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <div>
-                        {/* <Autocomplete suggestions={["Oranges", "Apples", "Banana", "Kiwi", "Mango"]}/> */}
-                        </div>
                         <form>
                             <div>
-                                Product <input
-                                    name='product'
-                                    placeholder='First Name'
-                                    onChange={this.handleChange}
-                                />
-                                Last Name <input
-                                    name='lastname'
-                                    placeholder='Last Name'
-                                    onChange={this.handleChange}
-                                />
-                                Address <input
-                                    name='address'
-                                    placeholder='Address'
-                                    onChange={this.handleChange}
-                                />
-                                Phone <input
-                                    name='phone'
-                                    placeholder='Phone'
-                                    onChange={this.handleChange}
-                                />
-                                Begin Date <input
-                                    name='begin_date'
-                                    placeholder='1970-01-01'
-                                    onChange={this.handleChange}
-                                />
+                                <div>
+                                    Product <Autocomplete suggestions={Array.from(this.state.products.keys())}
+                                        userInput={this.state.productInput}
+                                        setUserInput={this.handleProductInputChange} />
+                                </div>
+                                <div>
+                                    Customer <Autocomplete suggestions={Array.from(this.state.customers.keys())}
+                                        userInput={this.state.customerInput}
+                                        setUserInput={this.handleCustomerInputChange} />
+                                </div>
+                                <div>
+                                    Product <Autocomplete suggestions={Array.from(this.state.salespersons.keys())}
+                                        userInput={this.state.salespersonInput}
+                                        setUserInput={this.handleSalespersonInputChange} />
+                                </div>
+                                <div>
+                                    Sale Date <input
+                                        name='sale_date'
+                                        placeholder='1970-01-01'
+                                        onChange={this.handleChange}
+                                    />
+                                </div>
+                                <div>
+                                    Quantity <input
+                                        name='quantity'
+                                        defaultValue='1'
+                                        placeholder='1'
+                                        onChange={this.handleChange}
+                                    />
+                                </div>
                             </div>
                         </form>
 

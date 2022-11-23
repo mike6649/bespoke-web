@@ -5,6 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import "./form.css";
 import { Product } from '../models';
 import { ProductApiFp } from '../apis/product-api';
+import errorhandler from '../errorhandler';
 
 type Props = {
     product?: Product | null,
@@ -52,7 +53,7 @@ export default class UpdateProduct extends React.Component<Props> {
                             alert(res.data);
                         }
                     }
-                )
+                ).catch(errorhandler);
             }
         )
     }

@@ -5,6 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import "./form.css";
 import { Product } from '../models';
 import { ProductApiFp } from '../apis/product-api';
+import errorhandler from '../errorhandler';
 
 type Props = {
     show: boolean,
@@ -51,7 +52,7 @@ export default class CreateProduct extends React.Component<Props> {
                             alert(res.data);
                         }
                     }
-                )
+                ).catch(errorhandler);
             }
         )
     }
