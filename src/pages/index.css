@@ -1,13 +1,23 @@
 table {
   border: 2px solid;
-  width: 800px;
-  height: 200px;
+  table-layout: auto;
+  width: 100%;
 }
-  
+
 th {
   border-bottom: 1px solid black;
 }
-  
+
+tr td {
+  white-space: nowrap;
+}
+
 td {
   text-align: center;
+}
+
+.center {
+  margin: auto;
+  width: 70%;
+  padding: 10px;
 }
