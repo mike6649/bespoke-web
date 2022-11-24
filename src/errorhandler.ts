@@ -1,4 +1,4 @@
-import axios, {AxiosError} from 'axios';
+import {AxiosError} from 'axios';
 
 type ErrResponse = {
     err: string  

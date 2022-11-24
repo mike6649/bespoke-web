@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "./form.css";
-import { Sale, Salesperson } from '../models';
+import { Salesperson } from '../models';
 import { SalespersonApiFp } from '../apis/salesperson-api';
 import errorhandler from '../errorhandler';
 

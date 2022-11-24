@@ -16,7 +16,7 @@ import { Configuration } from "./configuration";
 // @ts-ignore
 import globalAxios, { AxiosRequestConfig, AxiosInstance } from 'axios';
 
-export const BASE_PATH: string = process.env.REACT_APP_API_URL ?? "http://localhost:8080"
+export const BASE_PATH: string = process.env.REACT_APP_API_URL ?? "/api"
 
 /**
  *

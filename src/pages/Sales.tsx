@@ -1,7 +1,7 @@
 import "./index.css";
 import React from "react";
 import { SaleApiFp } from '../apis/sale-api';
-import { Sale, DetailedSale } from "../models";
+import { DetailedSale } from "../models";
 import CreateSale from "../components/createsale";
 import * as GrIcons from "react-icons/gr";
 import errorhandler from "../errorhandler";
@@ -64,10 +64,10 @@ export default class Sales extends React.Component {
         <h1>Sales</h1>
         <div>
           <div>
-            Start Date <input value={this.state.startDate} onChange={this.onStartDateChange} />
+            Start Date <input value={this.state.startDate} placeholder="2022-01-01" onChange={this.onStartDateChange} />
           </div>
           <div>
-            End Date <input value={this.state.endDate} onChange={this.onEndDateChange} />
+            End Date <input value={this.state.endDate} placeholder="2022-03-31" onChange={this.onEndDateChange} />
           </div>
           <button onClick={(e) => { e.preventDefault(); this.loadData(); }}>Search</button>
         </div>

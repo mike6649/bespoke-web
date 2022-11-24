@@ -7,13 +7,13 @@ import CreateSalesperson from "../components/createsalesperson";
 import * as FaIcons from "react-icons/fa";
 import * as TbIcons from "react-icons/tb";
 import * as GrIcons from "react-icons/gr";
-import { NavigateFunction, Navigation, useNavigate } from "react-router-dom";
+import { NavigateFunction, useNavigate } from "react-router-dom";
 import errorhandler from "../errorhandler";
 
 export default function Salespersons (){
   const navigation = useNavigate();
   
-   return <SalespersonsClass navigation={navigation} /> //pass to your component.
+   return <SalespersonsClass navigation={navigation} />
   
     }
 
