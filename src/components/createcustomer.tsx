@@ -37,12 +37,10 @@ export default class CreateCustomer extends React.Component<Props> {
         for (f in this.state) {
             submission[f] = this.state[f];
         }
-        console.log(submission);
         CustomerApiFp().updateCustomer(submission as Customer).then(
             req => {
                 req().then(
                     res => {
-                        console.log(res.data);
                         this.handleClose();
                     }
                 ).catch(errorhandler);

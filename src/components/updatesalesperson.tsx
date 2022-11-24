@@ -41,7 +41,6 @@ export default class UpdateSalesperson extends React.Component<Props> {
         for (f in this.state) {
             submission[f] = this.state[f] ?? this.props.person![f];
         }
-        console.log(submission);
         SalespersonApiFp().updateSalesPerson(submission as Salesperson).then(
             req => {
                 req().then(

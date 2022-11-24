@@ -8,6 +8,7 @@ import Salespersons from './pages/Salespersons';
 import Sales from './pages/Sales';
 import Customers from './pages/Customers';
 import Products from './pages/Products';
+import ReportComponent from './components/report';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path="/customers" element={<Customers/>}/>
           <Route path="/products" element={<Products/>}/>
           <Route path="/sales" element={<Sales/>}/>
+          <Route path="/reports/:id" element={<ReportComponent/>}/>
         </Routes>
       </Router>
     </div>

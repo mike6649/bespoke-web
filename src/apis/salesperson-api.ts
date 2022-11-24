@@ -16,6 +16,7 @@ import { Configuration } from '../configuration';
 // Some imports not used depending on template conditions
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
+import { Report } from '../models';
 import { Salesperson } from '../models';
 /**
  * SalespersonApi - axios parameter creator
@@ -84,6 +85,64 @@ export const SalespersonApiAxiosParamCreator = function (configuration?: Configu
 
             if (firstname !== undefined) {
                 localVarQueryParameter['firstname'] = firstname;
+            }
+
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.params) {
+                query.set(key, options.params[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Quarterly Report
+         * @param {string} id Salesperson ID
+         * @param {string} year Year
+         * @param {string} quarter Quarter
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        quarterlyReport: async (id: string, year: string, quarter: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            if (id === null || id === undefined) {
+                throw new RequiredError('id','Required parameter id was null or undefined when calling quarterlyReport.');
+            }
+            // verify required parameter 'year' is not null or undefined
+            if (year === null || year === undefined) {
+                throw new RequiredError('year','Required parameter year was null or undefined when calling quarterlyReport.');
+            }
+            // verify required parameter 'quarter' is not null or undefined
+            if (quarter === null || quarter === undefined) {
+                throw new RequiredError('quarter','Required parameter quarter was null or undefined when calling quarterlyReport.');
+            }
+            const localVarPath = `/report/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions :AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (year !== undefined) {
+                localVarQueryParameter['year'] = year;
+            }
+
+            if (quarter !== undefined) {
+                localVarQueryParameter['quarter'] = quarter;
             }
 
             const query = new URLSearchParams(localVarUrlObj.search);
@@ -180,6 +239,22 @@ export const SalespersonApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @summary Quarterly Report
+         * @param {string} id Salesperson ID
+         * @param {string} year Year
+         * @param {string} quarter Quarter
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async quarterlyReport(id: string, year: string, quarter: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Report>>> {
+            const localVarAxiosArgs = await SalespersonApiAxiosParamCreator(configuration).quarterlyReport(id, year, quarter, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * 
          * @summary Update or create salesperson
          * @param {Salesperson} [body] salesperson object
          * @param {*} [options] Override http request option.
@@ -223,6 +298,18 @@ export const SalespersonApiFactory = function (configuration?: Configuration, ba
         },
         /**
          * 
+         * @summary Quarterly Report
+         * @param {string} id Salesperson ID
+         * @param {string} year Year
+         * @param {string} quarter Quarter
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async quarterlyReport(id: string, year: string, quarter: string, options?: AxiosRequestConfig): Promise<AxiosResponse<Report>> {
+            return SalespersonApiFp(configuration).quarterlyReport(id, year, quarter, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
          * @summary Update or create salesperson
          * @param {Salesperson} [body] salesperson object
          * @param {*} [options] Override http request option.
@@ -262,6 +349,19 @@ export class SalespersonApi extends BaseAPI {
      */
     public async getSalespersons(firstname?: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<Array<Salesperson>>> {
         return SalespersonApiFp(this.configuration).getSalespersons(firstname, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * 
+     * @summary Quarterly Report
+     * @param {string} id Salesperson ID
+     * @param {string} year Year
+     * @param {string} quarter Quarter
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SalespersonApi
+     */
+    public async quarterlyReport(id: string, year: string, quarter: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<Report>> {
+        return SalespersonApiFp(this.configuration).quarterlyReport(id, year, quarter, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * 

@@ -14,4 +14,3 @@
 export * from './apis/product-api';
 export * from './apis/sale-api';
 export * from './apis/salesperson-api';
-

@@ -44,7 +44,6 @@ export default class CreateSale extends React.Component<Props> {
         submission.quantity = parseInt(this.state.quantity);
         submission.sale_date = this.state.sale_date;
 
-        console.log(submission);
         SaleApiFp().createSale(submission as Sale).then(
             req => {
                 req().then(

@@ -39,12 +39,10 @@ export default class UpdateCustomer extends React.Component<Props> {
         for (f in this.state) {
             submission[f] = this.state[f] ?? this.props.person![f];
         }
-        console.log(submission);
         CustomerApiFp().updateCustomer(submission as Customer).then(
             req => {
                 req().then(
                     res => {
-                        console.log(res.data);
                         this.handleClose();
                     }
                 ).catch(errorhandler);

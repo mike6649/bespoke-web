@@ -5,15 +5,23 @@ import { Salesperson } from "../models";
 import UpdateSalesperson from "../components/updatesalesperson";
 import CreateSalesperson from "../components/createsalesperson";
 import * as FaIcons from "react-icons/fa";
+import * as TbIcons from "react-icons/tb";
 import * as GrIcons from "react-icons/gr";
+import { NavigateFunction, Navigation, useNavigate } from "react-router-dom";
 
+export default function Salespersons (){
+  const navigation = useNavigate();
+  
+   return <SalespersonsClass navigation={navigation} /> //pass to your component.
+  
+    }
 
-export default class Salespersons extends React.Component {
+class SalespersonsClass extends React.Component<{navigation: NavigateFunction}> {
   state = {
     persons: [],
     showModal: false,
     showCreateModal: false,
-    activePerson: null
+    activePerson: null,
   }
 
   loadData() {
@@ -23,7 +31,6 @@ export default class Salespersons extends React.Component {
           res => {
             const persons = res.data;
             persons.sort((a, b) => ((a?.id ?? 0) - (b?.id ?? 0)));
-            console.log(persons);
             this.setState({ persons: persons });
           }
         )
@@ -39,7 +46,7 @@ export default class Salespersons extends React.Component {
   }
 
   createSalesperson = () => {
-    this.setState({showCreateModal: true});
+    this.setState({ showCreateModal: true });
   }
 
   handleModalChange = (show: boolean) => {
@@ -54,6 +61,10 @@ export default class Salespersons extends React.Component {
     if (!show) {
       this.loadData();
     }
+  }
+
+  handleReportModalChange = (show: boolean) => {
+    this.setState({ showReportModal: show });
   }
 
   render() {
@@ -72,6 +83,7 @@ export default class Salespersons extends React.Component {
               <th>End Date</th>
               <th>Manager</th>
               <th>Edit</th>
+              <th>Report</th>
             </tr>
           </thead>
           <tbody>
@@ -88,19 +100,20 @@ export default class Salespersons extends React.Component {
                     <th>{person.end_date}</th>
                     <th>{person.manager}</th>
                     <th><FaIcons.FaRegEdit onClick={() => { this.updateSalesperson(person); }} /></th>
+                    <th><TbIcons.TbFileReport onClick={() => { this.props.navigation(`/reports/${person.id}`) }} /></th>
                   </tr>
                 )
             }
           </tbody>
         </table>
-        Add Salesperson <GrIcons.GrAddCircle  onClick= {() => {this.createSalesperson();}}/>
+        Add Salesperson <GrIcons.GrAddCircle onClick={() => { this.createSalesperson(); }} />
         <UpdateSalesperson
           person={this.state.activePerson}
           show={this.state.showModal}
           onChangeShow={this.handleModalChange}
         />
         <CreateSalesperson show={this.state.showCreateModal}
-        onChangeShow={this.handleCreateModalChange}
+          onChangeShow={this.handleCreateModalChange}
         />
       </div>
     );
