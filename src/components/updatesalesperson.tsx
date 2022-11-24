@@ -63,48 +63,62 @@ export default class UpdateSalesperson extends React.Component<Props> {
                     <Modal.Body>
                         <form>
                             <div>
-                                First Name <input
-                                    name='firstname'
-                                    placeholder='First Name'
-                                    defaultValue={this.props.person?.firstname}
-                                    onChange={this.handleChange}
-                                />
-                                Last Name <input
-                                    name='lastname'
-                                    placeholder='Last Name'
-                                    defaultValue={this.props.person?.lastname}
-                                    onChange={this.handleChange}
-                                />
-                                Address <input
-                                    name='address'
-                                    placeholder='Address'
-                                    defaultValue={this.props.person?.address}
-                                    onChange={this.handleChange}
-                                />
-                                Phone <input
-                                    name='phone'
-                                    placeholder='Phone'
-                                    defaultValue={this.props.person?.phone}
-                                    onChange={this.handleChange}
-                                />
-                                Begin Date <input
-                                    name='begin_date'
-                                    placeholder='1970-01-01'
-                                    defaultValue={this.props.person?.begin_date}
-                                    onChange={this.handleChange}
-                                />
-                                End Date <input
-                                    name='end_date'
-                                    placeholder='1970-01-01'
-                                    defaultValue={this.props.person?.end_date ?? ""}
-                                    onChange={this.handleChange}
-                                />
-                                Manager <input
-                                    name='manager'
-                                    placeholder='Manager'
-                                    defaultValue={this.props.person?.manager}
-                                    onChange={this.handleChange}
-                                />
+                                <div>
+                                    First Name <input
+                                        name='firstname'
+                                        placeholder='First Name'
+                                        defaultValue={this.props.person?.firstname}
+                                        onChange={this.handleChange}
+                                    />
+                                </div>
+                                <div>
+                                    Last Name <input
+                                        name='lastname'
+                                        placeholder='Last Name'
+                                        defaultValue={this.props.person?.lastname}
+                                        onChange={this.handleChange}
+                                    />
+                                </div>
+                                <div>
+                                    Address <input
+                                        name='address'
+                                        placeholder='Address'
+                                        defaultValue={this.props.person?.address}
+                                        onChange={this.handleChange}
+                                    />
+                                </div>
+                                <div>
+                                    Phone <input
+                                        name='phone'
+                                        placeholder='Phone'
+                                        defaultValue={this.props.person?.phone}
+                                        onChange={this.handleChange}
+                                    />
+                                </div>
+                                <div>
+                                    Begin Date <input
+                                        name='begin_date'
+                                        placeholder='1970-01-01'
+                                        defaultValue={this.props.person?.begin_date}
+                                        onChange={this.handleChange}
+                                    />
+                                </div>
+                                <div>
+                                    End Date <input
+                                        name='end_date'
+                                        placeholder='1970-01-01'
+                                        defaultValue={this.props.person?.end_date ?? ""}
+                                        onChange={this.handleChange}
+                                    />
+                                </div>
+                                <div>
+                                    Manager <input
+                                        name='manager'
+                                        placeholder='Manager'
+                                        defaultValue={this.props.person?.manager}
+                                        onChange={this.handleChange}
+                                    />
+                                </div>
                             </div>
                         </form>
 

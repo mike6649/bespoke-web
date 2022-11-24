@@ -67,42 +67,56 @@ export default class CreateProduct extends React.Component<Props> {
                     <Modal.Body>
                         <form>
                             <div>
-                                Name <input
-                                    name='name'
-                                    placeholder='Name'
-                                    onChange={this.handleChange}
-                                />
-                                Manufacturer <input
-                                    name='manufacturer'
-                                    placeholder='Manufacturer'
-                                    onChange={this.handleChange}
-                                />
-                                Style <input
-                                    name='style'
-                                    placeholder='Style'
-                                    onChange={this.handleChange}
-                                />
-                                Purchase Price <input
-                                    name='purchase_price'
-                                    type="number"
-                                    onChange={this.handleChange}
-                                />
-                                Sale Price <input
-                                    name='sale_price'
-                                    placeholder='234.56'
-                                    onChange={this.handleChange}
-                                />
-                                Quantity <input
-                                    name='quantity'
-                                    type="number"
-                                    placeholder='100'
-                                    onChange={this.handleChange}
-                                />
-                                Commission % <input
-                                    name='commission_pct'
-                                    placeholder='12.34'
-                                    onChange={this.handleChange}
-                                />
+                                <div>
+                                    Name <input
+                                        name='name'
+                                        placeholder='Name'
+                                        onChange={this.handleChange}
+                                    />
+                                </div>
+                                <div>
+                                    Manufacturer <input
+                                        name='manufacturer'
+                                        placeholder='Manufacturer'
+                                        onChange={this.handleChange}
+                                    />
+                                </div>
+                                <div>
+                                    Style <input
+                                        name='style'
+                                        placeholder='Style'
+                                        onChange={this.handleChange}
+                                    />
+                                </div>
+                                <div>
+                                    Purchase Price <input
+                                        name='purchase_price'
+                                        type="number"
+                                        onChange={this.handleChange}
+                                    />
+                                </div>
+                                <div>
+                                    Sale Price <input
+                                        name='sale_price'
+                                        placeholder='234.56'
+                                        onChange={this.handleChange}
+                                    />
+                                </div>
+                                <div>
+                                    Quantity <input
+                                        name='quantity'
+                                        type="number"
+                                        placeholder='100'
+                                        onChange={this.handleChange}
+                                    />
+                                </div>
+                                <div>
+                                    Commission % <input
+                                        name='commission_pct'
+                                        placeholder='12.34'
+                                        onChange={this.handleChange}
+                                    />
+                                </div>
                             </div>
                         </form>
 

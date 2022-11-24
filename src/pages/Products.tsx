@@ -6,6 +6,7 @@ import UpdateProduct from "../components/updateproduct";
 import CreateProduct from "../components/createproduct";
 import * as FaIcons from "react-icons/fa";
 import * as GrIcons from "react-icons/gr";
+import errorhandler from "../errorhandler";
 
 
 export default class Products extends React.Component {
@@ -26,7 +27,7 @@ export default class Products extends React.Component {
             console.log(products);
             this.setState({ products: products });
           }
-        )
+        ).catch(errorhandler);
       }
     );
   }

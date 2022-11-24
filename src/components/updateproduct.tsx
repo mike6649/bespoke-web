@@ -42,7 +42,7 @@ export default class UpdateProduct extends React.Component<Props> {
             submission[f] = this.state[f] ?? this.props.product![f];
         }
         (submission as Product).quantity = parseInt(submission.quantity ?? "0");
-        
+
         ProductApiFp().updateProduct(submission as Product).then(
             req => {
                 req().then(
@@ -68,49 +68,63 @@ export default class UpdateProduct extends React.Component<Props> {
                     <Modal.Body>
                         <form>
                             <div>
-                                Name <input
-                                    name='name'
-                                    placeholder='Name'
-                                    defaultValue={this.props.product?.name}
-                                    onChange={this.handleChange}
-                                />
-                                Manufacturer <input
-                                    name='manufacturer'
-                                    placeholder='Manufacturer'
-                                    defaultValue={this.props.product?.manufacturer}
-                                    onChange={this.handleChange}
-                                />
-                                Style <input
-                                    name='style'
-                                    placeholder='Style'
-                                    defaultValue={this.props.product?.style}
-                                    onChange={this.handleChange}
-                                />
-                                Purchase Price <input
-                                    name='purchase_price'
-                                    placeholder='123.45'
-                                    defaultValue={this.props.product?.purchase_price}
-                                    onChange={this.handleChange}
-                                />
-                                Sale Price <input
-                                    name='sale_price'
-                                    placeholder='234.56'
-                                    defaultValue={this.props.product?.sale_price}
-                                    onChange={this.handleChange}
-                                />
-                                Quantity <input
-                                    name='quantity'
-                                    type="number"
-                                    placeholder='100'
-                                    defaultValue={this.props.product?.quantity}
-                                    onChange={this.handleChange}
-                                />
-                                Commission % <input
-                                    name='commission_pct'
-                                    placeholder='12.34'
-                                    defaultValue={this.props.product?.commission_pct}
-                                    onChange={this.handleChange}
-                                />
+                                <div>
+                                    Name <input
+                                        name='name'
+                                        placeholder='Name'
+                                        defaultValue={this.props.product?.name}
+                                        onChange={this.handleChange}
+                                    />
+                                </div>
+                                <div>
+                                    Manufacturer <input
+                                        name='manufacturer'
+                                        placeholder='Manufacturer'
+                                        defaultValue={this.props.product?.manufacturer}
+                                        onChange={this.handleChange}
+                                    />
+                                </div>
+                                <div>
+                                    Style <input
+                                        name='style'
+                                        placeholder='Style'
+                                        defaultValue={this.props.product?.style}
+                                        onChange={this.handleChange}
+                                    />
+                                </div>
+                                <div>
+                                    Purchase Price <input
+                                        name='purchase_price'
+                                        placeholder='123.45'
+                                        defaultValue={this.props.product?.purchase_price}
+                                        onChange={this.handleChange}
+                                    />
+                                </div>
+                                <div>
+                                    Sale Price <input
+                                        name='sale_price'
+                                        placeholder='234.56'
+                                        defaultValue={this.props.product?.sale_price}
+                                        onChange={this.handleChange}
+                                    />
+                                </div>
+                                <div>
+                                    Quantity <input
+                                        name='quantity'
+                                        type="number"
+                                        placeholder='100'
+                                        defaultValue={this.props.product?.quantity}
+                                        onChange={this.handleChange}
+                                    />
+                                </div>
+                                <div>
+                                    Commission % <input
+                                        name='commission_pct'
+                                        placeholder='12.34'
+                                        defaultValue={this.props.product?.commission_pct}
+                                        onChange={this.handleChange}
+                                    />
+                                </div>
                             </div>
                         </form>
 

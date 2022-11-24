@@ -58,31 +58,41 @@ export default class CreateCustomer extends React.Component<Props> {
                     <Modal.Body>
                         <form>
                             <div>
-                                First Name <input
-                                    name='firstname'
-                                    placeholder='First Name'
-                                    onChange={this.handleChange}
-                                />
-                                Last Name <input
-                                    name='lastname'
-                                    placeholder='Last Name'
-                                    onChange={this.handleChange}
-                                />
-                                Address <input
-                                    name='address'
-                                    placeholder='Address'
-                                    onChange={this.handleChange}
-                                />
-                                Phone <input
-                                    name='phone'
-                                    placeholder='Phone'
-                                    onChange={this.handleChange}
-                                />
-                                Begin Date <input
-                                    name='begin_date'
-                                    placeholder='1970-01-01'
-                                    onChange={this.handleChange}
-                                />
+                                <div>
+                                    First Name <input
+                                        name='firstname'
+                                        placeholder='First Name'
+                                        onChange={this.handleChange}
+                                    />
+                                </div>
+                                <div>
+                                    Last Name <input
+                                        name='lastname'
+                                        placeholder='Last Name'
+                                        onChange={this.handleChange}
+                                    />
+                                </div>
+                                <div>
+                                    Address <input
+                                        name='address'
+                                        placeholder='Address'
+                                        onChange={this.handleChange}
+                                    />
+                                </div>
+                                <div>
+                                    Phone <input
+                                        name='phone'
+                                        placeholder='Phone'
+                                        onChange={this.handleChange}
+                                    />
+                                </div>
+                                <div>
+                                    Begin Date <input
+                                        name='begin_date'
+                                        placeholder='1970-01-01'
+                                        onChange={this.handleChange}
+                                    />
+                                </div>
                             </div>
                         </form>
 

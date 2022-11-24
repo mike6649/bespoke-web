@@ -33,7 +33,7 @@ class SalespersonsClass extends React.Component<{navigation: NavigateFunction}> 
             persons.sort((a, b) => ((a?.id ?? 0) - (b?.id ?? 0)));
             this.setState({ persons: persons });
           }
-        )
+        ).catch(errorhandler);
       }
     );
   }

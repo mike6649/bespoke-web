@@ -6,6 +6,7 @@ import UpdateCustomer from "../components/updatecustomer";
 import CreateCustomer from "../components/createcustomer";
 import * as FaIcons from "react-icons/fa";
 import * as GrIcons from "react-icons/gr";
+import errorhandler from "../errorhandler";
 
 
 export default class Customers extends React.Component {
@@ -26,7 +27,7 @@ export default class Customers extends React.Component {
             console.log(persons);
             this.setState({ persons: persons });
           }
-        )
+        ).catch(errorhandler);
       }
     );
   }

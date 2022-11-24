@@ -4,6 +4,7 @@ import { SaleApiFp } from '../apis/sale-api';
 import { Sale, DetailedSale } from "../models";
 import CreateSale from "../components/createsale";
 import * as GrIcons from "react-icons/gr";
+import errorhandler from "../errorhandler";
 
 
 export default class Sales extends React.Component {
@@ -23,7 +24,7 @@ export default class Sales extends React.Component {
             sales.sort((a, b) => (Date.parse(a?.sale_date ?? "2000-01-01") - Date.parse(b?.sale_date ?? "2000-01-01")));
             this.setState({ sales: sales });
           }
-        )
+        ).catch(errorhandler);
       }
     );
   }

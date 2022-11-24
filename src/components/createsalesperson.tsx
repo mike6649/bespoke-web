@@ -60,42 +60,56 @@ export default class CreateSalesperson extends React.Component<Props> {
                     <Modal.Body>
                         <form>
                             <div>
-                                First Name <input
-                                    name='firstname'
-                                    placeholder='First Name'
-                                    value={this.state.firstname}
-                                    onChange={this.handleChange}
-                                />
-                                Last Name <input
-                                    name='lastname'
-                                    placeholder='Last Name'
-                                    onChange={this.handleChange}
-                                />
-                                Address <input
-                                    name='address'
-                                    placeholder='Address'
-                                    onChange={this.handleChange}
-                                />
-                                Phone <input
-                                    name='phone'
-                                    placeholder='Phone'
-                                    onChange={this.handleChange}
-                                />
-                                Begin Date <input
-                                    name='begin_date'
-                                    placeholder='1970-01-01'
-                                    onChange={this.handleChange}
-                                />
-                                End Date <input
-                                    name='end_date'
-                                    placeholder='1970-01-01'
-                                    onChange={this.handleChange}
-                                />
-                                Manager <input
-                                    name='manager'
-                                    placeholder='Manager'
-                                    onChange={this.handleChange}
-                                />
+                                <div>
+                                    First Name <input
+                                        name='firstname'
+                                        placeholder='First Name'
+                                        value={this.state.firstname}
+                                        onChange={this.handleChange}
+                                    />
+                                </div>
+                                <div>
+                                    Last Name <input
+                                        name='lastname'
+                                        placeholder='Last Name'
+                                        onChange={this.handleChange}
+                                    />
+                                </div>
+                                <div>
+                                    Address <input
+                                        name='address'
+                                        placeholder='Address'
+                                        onChange={this.handleChange}
+                                    />
+                                </div>
+                                <div>
+                                    Phone <input
+                                        name='phone'
+                                        placeholder='Phone'
+                                        onChange={this.handleChange}
+                                    />
+                                </div>
+                                <div>
+                                    Begin Date <input
+                                        name='begin_date'
+                                        placeholder='1970-01-01'
+                                        onChange={this.handleChange}
+                                    />
+                                </div>
+                                <div>
+                                    End Date <input
+                                        name='end_date'
+                                        placeholder='1970-01-01'
+                                        onChange={this.handleChange}
+                                    />
+                                </div>
+                                <div>
+                                    Manager <input
+                                        name='manager'
+                                        placeholder='Manager'
+                                        onChange={this.handleChange}
+                                    />
+                                </div>
                             </div>
                         </form>
 
