@@ -138,7 +138,7 @@ export default class CreateSale extends React.Component<Props> {
                                         setUserInput={this.handleCustomerInputChange} />
                                 </div>
                                 <div>
-                                    Product <Autocomplete suggestions={Array.from(this.state.salespersons.keys())}
+                                    Salesperson <Autocomplete suggestions={Array.from(this.state.salespersons.keys())}
                                         userInput={this.state.salespersonInput}
                                         setUserInput={this.handleSalespersonInputChange} />
                                 </div>

@@ -8,12 +8,14 @@ import * as GrIcons from "react-icons/gr";
 
 export default class Sales extends React.Component {
   state = {
+    startDate: undefined,
+    endDate: undefined,
     sales: [],
     showCreateModal: false,
   }
 
   loadData() {
-    SaleApiFp().getSales().then(
+    SaleApiFp().getSales(this.state.startDate, this.state.endDate).then(
       req => {
         req().then(
           res => {
@@ -47,10 +49,27 @@ export default class Sales extends React.Component {
     }
   }
 
+  onStartDateChange = (e: any) => {
+    this.setState({ startDate: e.target.value });
+  }
+
+  onEndDateChange = (e: any) => {
+    this.setState({ endDate: e.target.value });
+  }
+
   render() {
     return (
       <div className="sales center">
         <h1>Sales</h1>
+        <div>
+          <div>
+            Start Date <input value={this.state.startDate} onChange={this.onStartDateChange} />
+          </div>
+          <div>
+            End Date <input value={this.state.endDate} onChange={this.onEndDateChange} />
+          </div>
+          <button onClick={(e) => { e.preventDefault(); this.loadData(); }}>Search</button>
+        </div>
         <table>
           <thead>
             <tr className="header">

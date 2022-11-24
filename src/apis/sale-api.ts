@@ -11,269 +11,280 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
- import globalAxios, { AxiosResponse, AxiosInstance, AxiosRequestConfig } from 'axios';
- import { Configuration } from '../configuration';
- // Some imports not used depending on template conditions
- // @ts-ignore
- import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
- import { DetailedSale } from '../models';
- import { Sale } from '../models';
- /**
-  * SaleApi - axios parameter creator
-  * @export
-  */
- export const SaleApiAxiosParamCreator = function (configuration?: Configuration) {
-     return {
-         /**
-          * 
-          * @summary Create Sale
-          * @param {Sale} [body] Sale object
-          * @param {*} [options] Override http request option.
-          * @throws {RequiredError}
-          */
-         createSale: async (body?: Sale, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-             const localVarPath = `/sale`;
-             // use dummy base URL string because the URL constructor only accepts absolute URLs.
-             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
-             let baseOptions;
-             if (configuration) {
-                 baseOptions = configuration.baseOptions;
-             }
-             const localVarRequestOptions :AxiosRequestConfig = { method: 'POST', ...baseOptions, ...options};
-             const localVarHeaderParameter = {} as any;
-             const localVarQueryParameter = {} as any;
- 
-             localVarHeaderParameter['Content-Type'] = 'application/json';
- 
-             const query = new URLSearchParams(localVarUrlObj.search);
-             for (const key in localVarQueryParameter) {
-                 query.set(key, localVarQueryParameter[key]);
-             }
-             for (const key in options.params) {
-                 query.set(key, options.params[key]);
-             }
-             localVarUrlObj.search = (new URLSearchParams(query)).toString();
-             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-             const needsSerialization = (typeof body !== "string") || localVarRequestOptions.headers!['Content-Type'] === 'application/json';
-             localVarRequestOptions.data =  needsSerialization ? JSON.stringify(body !== undefined ? body : {}) : (body || "");
- 
-             return {
-                 url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
-                 options: localVarRequestOptions,
-             };
-         },
-         /**
-          * 
-          * @summary Get sale by ID
-          * @param {string} id Customer ID
-          * @param {*} [options] Override http request option.
-          * @throws {RequiredError}
-          */
-         getSaleById: async (id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-             // verify required parameter 'id' is not null or undefined
-             if (id === null || id === undefined) {
-                 throw new RequiredError('id','Required parameter id was null or undefined when calling getSaleById.');
-             }
-             const localVarPath = `/sale/{id}`
-                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
-             // use dummy base URL string because the URL constructor only accepts absolute URLs.
-             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
-             let baseOptions;
-             if (configuration) {
-                 baseOptions = configuration.baseOptions;
-             }
-             const localVarRequestOptions :AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
-             const localVarHeaderParameter = {} as any;
-             const localVarQueryParameter = {} as any;
- 
-             const query = new URLSearchParams(localVarUrlObj.search);
-             for (const key in localVarQueryParameter) {
-                 query.set(key, localVarQueryParameter[key]);
-             }
-             for (const key in options.params) {
-                 query.set(key, options.params[key]);
-             }
-             localVarUrlObj.search = (new URLSearchParams(query)).toString();
-             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
- 
-             return {
-                 url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
-                 options: localVarRequestOptions,
-             };
-         },
-         /**
-          * Get list of sales
-          * @summary Get list of sales
-          * @param {string} [customerID] Customer ID
-          * @param {*} [options] Override http request option.
-          * @throws {RequiredError}
-          */
-         getSales: async (customerID?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-             const localVarPath = `/sales`;
-             // use dummy base URL string because the URL constructor only accepts absolute URLs.
-             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
-             let baseOptions;
-             if (configuration) {
-                 baseOptions = configuration.baseOptions;
-             }
-             const localVarRequestOptions :AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
-             const localVarHeaderParameter = {} as any;
-             const localVarQueryParameter = {} as any;
- 
-             if (customerID !== undefined) {
-                 localVarQueryParameter['customerID'] = customerID;
-             }
- 
-             const query = new URLSearchParams(localVarUrlObj.search);
-             for (const key in localVarQueryParameter) {
-                 query.set(key, localVarQueryParameter[key]);
-             }
-             for (const key in options.params) {
-                 query.set(key, options.params[key]);
-             }
-             localVarUrlObj.search = (new URLSearchParams(query)).toString();
-             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
- 
-             return {
-                 url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
-                 options: localVarRequestOptions,
-             };
-         },
-     }
- };
- 
- /**
-  * SaleApi - functional programming interface
-  * @export
-  */
- export const SaleApiFp = function(configuration?: Configuration) {
-     return {
-         /**
-          * 
-          * @summary Create Sale
-          * @param {Sale} [body] Sale object
-          * @param {*} [options] Override http request option.
-          * @throws {RequiredError}
-          */
-         async createSale(body?: Sale, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Sale>>> {
-             const localVarAxiosArgs = await SaleApiAxiosParamCreator(configuration).createSale(body, options);
-             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
-                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
-                 return axios.request(axiosRequestArgs);
-             };
-         },
-         /**
-          * 
-          * @summary Get sale by ID
-          * @param {string} id Customer ID
-          * @param {*} [options] Override http request option.
-          * @throws {RequiredError}
-          */
-         async getSaleById(id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<DetailedSale>>> {
-             const localVarAxiosArgs = await SaleApiAxiosParamCreator(configuration).getSaleById(id, options);
-             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
-                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
-                 return axios.request(axiosRequestArgs);
-             };
-         },
-         /**
-          * Get list of sales
-          * @summary Get list of sales
-          * @param {string} [customerID] Customer ID
-          * @param {*} [options] Override http request option.
-          * @throws {RequiredError}
-          */
-         async getSales(customerID?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Array<DetailedSale>>>> {
-             const localVarAxiosArgs = await SaleApiAxiosParamCreator(configuration).getSales(customerID, options);
-             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
-                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
-                 return axios.request(axiosRequestArgs);
-             };
-         },
-     }
- };
- 
- /**
-  * SaleApi - factory interface
-  * @export
-  */
- export const SaleApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-     return {
-         /**
-          * 
-          * @summary Create Sale
-          * @param {Sale} [body] Sale object
-          * @param {*} [options] Override http request option.
-          * @throws {RequiredError}
-          */
-         async createSale(body?: Sale, options?: AxiosRequestConfig): Promise<AxiosResponse<Sale>> {
-             return SaleApiFp(configuration).createSale(body, options).then((request) => request(axios, basePath));
-         },
-         /**
-          * 
-          * @summary Get sale by ID
-          * @param {string} id Customer ID
-          * @param {*} [options] Override http request option.
-          * @throws {RequiredError}
-          */
-         async getSaleById(id: string, options?: AxiosRequestConfig): Promise<AxiosResponse<DetailedSale>> {
-             return SaleApiFp(configuration).getSaleById(id, options).then((request) => request(axios, basePath));
-         },
-         /**
-          * Get list of sales
-          * @summary Get list of sales
-          * @param {string} [customerID] Customer ID
-          * @param {*} [options] Override http request option.
-          * @throws {RequiredError}
-          */
-         async getSales(customerID?: string, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<DetailedSale>>> {
-             return SaleApiFp(configuration).getSales(customerID, options).then((request) => request(axios, basePath));
-         },
-     };
- };
- 
- /**
-  * SaleApi - object-oriented interface
-  * @export
-  * @class SaleApi
-  * @extends {BaseAPI}
-  */
- export class SaleApi extends BaseAPI {
-     /**
-      * 
-      * @summary Create Sale
-      * @param {Sale} [body] Sale object
-      * @param {*} [options] Override http request option.
-      * @throws {RequiredError}
-      * @memberof SaleApi
-      */
-     public async createSale(body?: Sale, options?: AxiosRequestConfig) : Promise<AxiosResponse<Sale>> {
-         return SaleApiFp(this.configuration).createSale(body, options).then((request) => request(this.axios, this.basePath));
-     }
-     /**
-      * 
-      * @summary Get sale by ID
-      * @param {string} id Customer ID
-      * @param {*} [options] Override http request option.
-      * @throws {RequiredError}
-      * @memberof SaleApi
-      */
-     public async getSaleById(id: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<DetailedSale>> {
-         return SaleApiFp(this.configuration).getSaleById(id, options).then((request) => request(this.axios, this.basePath));
-     }
-     /**
-      * Get list of sales
-      * @summary Get list of sales
-      * @param {string} [customerID] Customer ID
-      * @param {*} [options] Override http request option.
-      * @throws {RequiredError}
-      * @memberof SaleApi
-      */
-     public async getSales(customerID?: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<Array<DetailedSale>>> {
-         return SaleApiFp(this.configuration).getSales(customerID, options).then((request) => request(this.axios, this.basePath));
-     }
- }
- 
+import globalAxios, { AxiosResponse, AxiosInstance, AxiosRequestConfig } from 'axios';
+import { Configuration } from '../configuration';
+// Some imports not used depending on template conditions
+// @ts-ignore
+import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
+import { DetailedSale } from '../models';
+import { Sale } from '../models';
+/**
+ * SaleApi - axios parameter creator
+ * @export
+ */
+export const SaleApiAxiosParamCreator = function (configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @summary Create Sale
+         * @param {Sale} [body] Sale object
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        createSale: async (body?: Sale, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/sale`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions :AxiosRequestConfig = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.params) {
+                query.set(key, options.params[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            const needsSerialization = (typeof body !== "string") || localVarRequestOptions.headers!['Content-Type'] === 'application/json';
+            localVarRequestOptions.data =  needsSerialization ? JSON.stringify(body !== undefined ? body : {}) : (body || "");
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @summary Get sale by ID
+         * @param {string} id Customer ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getSaleById: async (id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            if (id === null || id === undefined) {
+                throw new RequiredError('id','Required parameter id was null or undefined when calling getSaleById.');
+            }
+            const localVarPath = `/sale/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions :AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.params) {
+                query.set(key, options.params[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Get list of sales
+         * @summary Get list of sales
+         * @param {string} [beginDate] Begin Date
+         * @param {string} [endDate] End Date
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getSales: async (beginDate?: string, endDate?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/sales`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions :AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (beginDate !== undefined) {
+                localVarQueryParameter['begin_date'] = (beginDate as any instanceof Date) ?
+                    (beginDate as any).toISOString().substr(0,10) :
+                    beginDate;
+            }
+
+            if (endDate !== undefined) {
+                localVarQueryParameter['end_date'] = (endDate as any instanceof Date) ?
+                    (endDate as any).toISOString().substr(0,10) :
+                    endDate;
+            }
+
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.params) {
+                query.set(key, options.params[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
+    }
+};
+
+/**
+ * SaleApi - functional programming interface
+ * @export
+ */
+export const SaleApiFp = function(configuration?: Configuration) {
+    return {
+        /**
+         * 
+         * @summary Create Sale
+         * @param {Sale} [body] Sale object
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async createSale(body?: Sale, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Sale>>> {
+            const localVarAxiosArgs = await SaleApiAxiosParamCreator(configuration).createSale(body, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * 
+         * @summary Get sale by ID
+         * @param {string} id Customer ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getSaleById(id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<DetailedSale>>> {
+            const localVarAxiosArgs = await SaleApiAxiosParamCreator(configuration).getSaleById(id, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * Get list of sales
+         * @summary Get list of sales
+         * @param {string} [beginDate] Begin Date
+         * @param {string} [endDate] End Date
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getSales(beginDate?: string, endDate?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Array<DetailedSale>>>> {
+            const localVarAxiosArgs = await SaleApiAxiosParamCreator(configuration).getSales(beginDate, endDate, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+    }
+};
+
+/**
+ * SaleApi - factory interface
+ * @export
+ */
+export const SaleApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    return {
+        /**
+         * 
+         * @summary Create Sale
+         * @param {Sale} [body] Sale object
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async createSale(body?: Sale, options?: AxiosRequestConfig): Promise<AxiosResponse<Sale>> {
+            return SaleApiFp(configuration).createSale(body, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary Get sale by ID
+         * @param {string} id Customer ID
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getSaleById(id: string, options?: AxiosRequestConfig): Promise<AxiosResponse<DetailedSale>> {
+            return SaleApiFp(configuration).getSaleById(id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Get list of sales
+         * @summary Get list of sales
+         * @param {string} [beginDate] Begin Date
+         * @param {string} [endDate] End Date
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getSales(beginDate?: string, endDate?: string, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<DetailedSale>>> {
+            return SaleApiFp(configuration).getSales(beginDate, endDate, options).then((request) => request(axios, basePath));
+        },
+    };
+};
+
+/**
+ * SaleApi - object-oriented interface
+ * @export
+ * @class SaleApi
+ * @extends {BaseAPI}
+ */
+export class SaleApi extends BaseAPI {
+    /**
+     * 
+     * @summary Create Sale
+     * @param {Sale} [body] Sale object
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SaleApi
+     */
+    public async createSale(body?: Sale, options?: AxiosRequestConfig) : Promise<AxiosResponse<Sale>> {
+        return SaleApiFp(this.configuration).createSale(body, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * 
+     * @summary Get sale by ID
+     * @param {string} id Customer ID
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SaleApi
+     */
+    public async getSaleById(id: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<DetailedSale>> {
+        return SaleApiFp(this.configuration).getSaleById(id, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * Get list of sales
+     * @summary Get list of sales
+     * @param {string} [beginDate] Begin Date
+     * @param {string} [endDate] End Date
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SaleApi
+     */
+    public async getSales(beginDate?: string, endDate?: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<Array<DetailedSale>>> {
+        return SaleApiFp(this.configuration).getSales(beginDate, endDate, options).then((request) => request(this.axios, this.basePath));
+    }
+}
